@@ -40,6 +40,7 @@ public class SubComponentTestActivity extends AppCompatActivity {
 
         System.out.println("dummyStringArray = " + Arrays.toString(dummyStringArray));
         System.out.println("childSubComponent.hashMapWrapper() = " + childSubComponent.hashMapWrapper());
+        System.out.println("childSubComponent Same method as parent dummyStringArray = " + Arrays.toString(childSubComponent.subWrapperStringArray())); // working fine.
 //        System.out.println("subHashMap injected from ChildSubComponent= " + subHashMap);
     }
 }

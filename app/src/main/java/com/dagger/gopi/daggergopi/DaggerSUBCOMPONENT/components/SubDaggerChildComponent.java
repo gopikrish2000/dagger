@@ -18,5 +18,8 @@ public interface SubDaggerChildComponent {
     @Named("SubFirstHashMap")
     public HashMap<String, String> hashMapWrapper();
 
+    @Named("SubDummyStringAry")
+    public String[] subWrapperStringArray();
+
 //    void inject(SubComponentTestActivity activity);
 }

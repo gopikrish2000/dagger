@@ -3,6 +3,8 @@ package com.dagger.gopi.daggergopi.DaggerSUBCOMPONENT.components;
 import com.dagger.gopi.daggergopi.DaggerSUBCOMPONENT.modules.SubDaggerFirstModule;
 import com.dagger.gopi.daggergopi.activities.SubComponentTestActivity;
 
+import javax.inject.Named;
+
 import dagger.Component;
 
 /**
@@ -12,6 +14,9 @@ import dagger.Component;
 @Component(modules = {SubDaggerFirstModule.class})
 public interface SubDaggerParentComponent {
     void inject(SubComponentTestActivity activity);
+
+    @Named("SubDummyStringAry")
+    public String[] subWrapperStringArray();
 
     SubDaggerChildComponent getChildSubComponent();
 }
