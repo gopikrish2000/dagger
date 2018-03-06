@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 
+import com.dagger.gopi.daggergopi.daggercomponent.DaggerDependentDaggerComponent;
 import com.dagger.gopi.daggergopi.daggercomponent.DaggerFirstDaggerComponent;
+import com.dagger.gopi.daggergopi.daggercomponent.DependentDaggerComponent;
 import com.dagger.gopi.daggergopi.daggercomponent.FirstDaggerComponent;
 import com.dagger.gopi.daggergopi.daggermodules.DaggerFirstModule;
 import com.dagger.gopi.daggergopi.daggermodules.DaggerSecondModule;
+import com.dagger.gopi.daggergopi.daggermodules.DependentDaggerModule;
 import com.dagger.gopi.daggergopi.pojos.DummyConstructorInjection;
 
 import java.util.Arrays;
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirstDaggerComponent firstDaggerComponent = DaggerFirstDaggerComponent.builder().daggerFirstModule(new DaggerFirstModule()).daggerSecondModule(new DaggerSecondModule(getApplicationContext())).build();  // if no Module has a constructor then directly use "DaggerFirstDaggerComponent.create();"
-//        DependentDaggerComponent dependentDaggerComponent = DaggerDependentDaggerComponent.builder().firstDaggerComponent(firstDaggerComponent).dependentDaggerModule(new DependentDaggerModule()).build();
+        DependentDaggerComponent dependentDaggerComponent = DaggerDependentDaggerComponent.builder().firstDaggerComponent(firstDaggerComponent).dependentDaggerModule(new DependentDaggerModule()).build();
         firstDaggerComponent.injectMainActivity(this);  // This will make @Inject work.
 //        dependentDaggerComponent.injectMainActivity1(this);
 //        executor = firstDaggerComponent.getProvidedExecutor();  /*First way to do*/
@@ -53,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
         outsidePojoWithInject.printExecutorStatement();
 
         System.out.println("executorPair first is  " + executorPair.first + " second is " + Arrays.toString(executorPair.second));
-//        System.out.println("dependentDaggerComponent firstHashMap val is " + dependentDaggerComponent.getDefaultFirstHashMap() + " parent methods ");
+        dependentDaggerComponent.getProvidedExecutorOfParent().execute(() -> System.out.println(" Same method as parent working fine in Dependent Component as well"));
+        System.out.println("dependentDaggerComponent firstHashMap val is " + dependentDaggerComponent.getDefaultFirstHashMap() + " parent methods ");
 //        System.out.println("firstHashMap after injected DependentDaggerComponent = " + firstHashMap);
 
         dummyConstructorInjection.print();

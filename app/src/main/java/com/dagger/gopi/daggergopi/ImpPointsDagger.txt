@@ -21,12 +21,27 @@ public interface FirstDaggerComponent {
 
 5. @Singleton ( Global Singletons) scope will work based on number of times u created Component ( DaggerFirstDaggerComponent.create()). If called once in Application Class & expose FirstDaggerComponent getComponent() method for everyone to use it. [ Global Singletons create component in Application class]
 
-6. Local Singletons
+6. Local Singletons -> nothing but create DaggerFirstComponent.create() in activity start ( n pass to fragments, adapters same instance) & use a custom Scope like @Singleton or @PerActivity then every time activity is created these local Singletons will be created again.
 
 7. If not put as @Singleton then number of times Dagger injects that it creates those many times the objects. So put @Singleton & create component in Application Class for Global Singletons.
 
+8. Number of Objects created of @Provides method is
+  If no scope defined then -> (Number of Times u create DaggerFirstComponent.create() those many instances will be created * Number of times that Object is injected in code)
+  Else if scope defined then -> Number of Times u create DaggerFirstComponent.create() those many instances will be created  [ regarless of no. of injections ]
 
+9. For Both DependsOn Child Components or SubComponents writing same method in interface of parent & in child Works fine. Like childComponent.sameMethodInParent() giving proper values.
+
+/// *** Working fine of DependsOn Component (getProvidedExecutorOfParent() method similar method is defined in the parent.)
+FirstDaggerComponent firstDaggerComponent = DaggerFirstDaggerComponent.builder().daggerFirstModule(new DaggerFirstModule()).daggerSecondModule(new DaggerSecondModule(getApplicationContext())).build();  // if no Module has a constructor then directly use "DaggerFirstDaggerComponent.create();"
+        DependentDaggerComponent dependentDaggerComponent = DaggerDependentDaggerComponent.builder().firstDaggerComponent(firstDaggerComponent).dependentDaggerModule(new DependentDaggerModule()).build();
+        dependentDaggerComponent.getProvidedExecutorOfParent().execute(() -> System.out.println(" Same method as parent working fine in Dependent Component as well"));
+/// ****** DependsOn Component ends here *** ///
+
+/// *** Working fine of Sub Component (getProvidedExecutorOfParent() method similar method is defined in the parent.)
+        SubDaggerParentComponent subDaggerParentComponent = DaggerSubDaggerParentComponent.create();
+        SubDaggerChildComponent childSubComponent = subDaggerParentComponent.getChildSubComponent();
+        System.out.println(childSubComponent.getParentDummyStringArray()); // Works fine
+/// ***** Sub Component ends here **** ///
 
 Doubts::
-1. Scopes
-2. Depends vs SubComponents.
+. Depends vs SubComponents.  both cases @Inject of child dependencies not working.

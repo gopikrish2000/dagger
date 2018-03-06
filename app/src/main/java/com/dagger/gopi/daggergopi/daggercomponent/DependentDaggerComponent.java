@@ -5,6 +5,7 @@ import com.dagger.gopi.daggergopi.annotations.DependentDaggerCompAnnotation;
 import com.dagger.gopi.daggergopi.daggermodules.DependentDaggerModule;
 
 import java.util.HashMap;
+import java.util.concurrent.Executor;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -20,6 +21,8 @@ public interface DependentDaggerComponent {
 
     @Named("FirstHashMap")
     public HashMap<String, String> getDefaultFirstHashMap();
+
+    Executor getProvidedExecutorOfParent();
 
 //    void injectMainActivity1(MainActivity activity);
 }
