@@ -1,0 +1,32 @@
+
+
+1. Constructor injection can be any where in the code ( see OutsidePojoWithInject)
+2. For member injection ( instance variables @Inject) we have to get Component Object & either use inject(this) or write seperate methods to get what objects u require from it.
+
+3. If for a module(ActivityB) u don't want to expose all the object but only some part of it then DONT add injectActivityB(ActivityB act) in component interface then it cannot use @Inject for members & Expose few methods in component interface for it to get.
+
+ @Component(modules = { DaggerFirstModule.class, DaggerSecondModule.class})  // either comma seperated multiple classes or
+public interface FirstDaggerComponent {
+    void injectMainActivity(MainActivity mainActivity); // This will make @Inject work in main activity.
+    // DON't write injectActivityB(ActivityB act) to not expose @Inject in ActivityB
+
+    Executor getExposePartialImplementationWithoutAllDependencies(); // Will Expose functionality for child/Dependent components. Can be used by everyone including ActivityB.
+}
+
+4. Inside Module with @Provides u can directly use other @Provides dependencies
+    @Provides                       //provides method can internally use the other @Provides methods like Executor & String[] of DaggerSecondModule
+    public Pair<Executor, String[]> provideExecutorPair(Executor executor, @Named("dummyStringAry") String[] stringAry) {
+        return Pair.create(executor, stringAry);
+    }
+
+5. @Singleton ( Global Singletons) scope will work based on number of times u created Component ( DaggerFirstDaggerComponent.create()). If called once in Application Class & expose FirstDaggerComponent getComponent() method for everyone to use it. [ Global Singletons create component in Application class]
+
+6. Local Singletons
+
+7. If not put as @Singleton then number of times Dagger injects that it creates those many times the objects. So put @Singleton & create component in Application Class for Global Singletons.
+
+
+
+Doubts::
+1. Scopes
+2. Depends vs SubComponents.
