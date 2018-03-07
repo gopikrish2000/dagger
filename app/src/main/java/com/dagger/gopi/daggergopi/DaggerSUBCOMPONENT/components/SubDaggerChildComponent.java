@@ -21,5 +21,5 @@ public interface SubDaggerChildComponent {
     @Named("SubDummyStringAry")
     public String[] subWrapperStringArray();
 
-//    void inject(SubComponentTestActivity activity);
+    void inject(SubComponentTestActivity activity);
 }

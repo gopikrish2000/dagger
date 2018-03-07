@@ -15,8 +15,5 @@ import dagger.Component;
 public interface SubDaggerParentComponent {
     void inject(SubComponentTestActivity activity);
 
-    @Named("SubDummyStringAry")
-    public String[] subWrapperStringArray();
-
     SubDaggerChildComponent getChildSubComponent();
 }

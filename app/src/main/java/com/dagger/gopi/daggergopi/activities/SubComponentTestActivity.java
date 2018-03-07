@@ -36,7 +36,7 @@ public class SubComponentTestActivity extends AppCompatActivity {
         SubDaggerParentComponent subDaggerParentComponent = DaggerSubDaggerParentComponent.create();
         SubDaggerChildComponent childSubComponent = subDaggerParentComponent.getChildSubComponent();
         subDaggerParentComponent.inject(this);
-//        childSubComponent.inject(this);
+        childSubComponent.inject(this);
 
         System.out.println("dummyStringArray = " + Arrays.toString(dummyStringArray));
         System.out.println("childSubComponent.hashMapWrapper() = " + childSubComponent.hashMapWrapper());

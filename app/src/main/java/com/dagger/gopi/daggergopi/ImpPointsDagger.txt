@@ -43,5 +43,11 @@ FirstDaggerComponent firstDaggerComponent = DaggerFirstDaggerComponent.builder()
         System.out.println(childSubComponent.getParentDummyStringArray()); // Works fine
 /// ***** Sub Component ends here **** ///
 
+
+10. Imp differences between DependsOn & Subcomponent. ( ***** )
+    a. DependsOn just has access to Wrapper methods exposed in parent & if u put same return time method in ChildDependsOn then it works . BUT SubComponent u no need to declare wrapper methods ( bcoz Subcomponent has complete knowledge about Dependency Graph where as DependsOn only knows about exposed methods. )
+    b. DependsOn Components can be independent But SubComponent u explicitly need to declare Child Component Definition in Parent Component Interface.
+    c. Inject is not working for both DependsOn & Subcomponent ( donno why)???
+
 Doubts::
 . Depends vs SubComponents.  both cases @Inject of child dependencies not working.
