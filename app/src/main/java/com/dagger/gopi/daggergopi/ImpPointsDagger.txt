@@ -51,3 +51,7 @@ FirstDaggerComponent firstDaggerComponent = DaggerFirstDaggerComponent.builder()
 
 Doubts::
 . Depends vs SubComponents.  both cases @Inject of child dependencies not working.
+
+1. Inject is not working for both DependsOn & Subcomponent ( donno why)???
+2. @Scope should be different for DependsOn Component.... ?
+3. What is use of scope.
