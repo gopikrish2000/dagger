@@ -1,4 +1,4 @@
-
+*********** Imp Points **********
 
 1. Constructor injection can be any where in the code ( see OutsidePojoWithInject)
 2. For member injection ( instance variables @Inject) we have to get Component Object & either use inject(this) or write seperate methods to get what objects u require from it.
