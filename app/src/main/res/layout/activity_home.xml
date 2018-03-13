@@ -29,4 +29,15 @@
         app:layout_constraintTop_toBottomOf="@id/home_btn"
         />
 
+    <Button
+        android:id="@+id/first_architecture_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Architecture Component"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subcomp_btn"
+        />
+
 </android.support.constraint.ConstraintLayout>

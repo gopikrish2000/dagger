@@ -20,6 +20,10 @@
         </activity>
         <activity android:name=".activities.SubComponentTestActivity">
         </activity>
+        <activity android:name="com.architectureComponents.gopi.FirstArchitectureComponentActivity">
+        </activity>
+        <activity android:name="com.architectureComponents.gopi.viewmodelArchitecture.ViewModelArchitectureActivity">
+        </activity>
     </application>
 
 </manifest>
