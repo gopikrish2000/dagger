@@ -12,3 +12,15 @@ Mockito.doCallRealMethod().when(student).samplePrint();   // For mocked object i
          }).when(student).voidMethodDoingNothing();
 
 5. Verify method u see how many times that method is called ...  Mockito.verify(student, atLeastOnce()).getAge();
+6. If we want custom returnValue based on input arguments then use ThenANSWER  than ThenRETURN
+Mockito.when(student.getPersonalizedName("sampleName")).thenAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                String argument = (String) invocation.getArgument(0);
+                if(argument.contains("sample")){
+                    return "MockitoChangedSampleName";
+                }
+                return argument;
+            }
+        });
+System.out.println(" personalizedName for sampleName is  " + student.getPersonalizedName("sampleName") + " personalizedName for dummyName is " + student.getPersonalizedName("dummyName"));

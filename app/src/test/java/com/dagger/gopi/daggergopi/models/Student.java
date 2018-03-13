@@ -13,6 +13,10 @@ public class Student {
         return name;
     }
 
+    public String getPersonalizedName(String input) {
+        return input + "_personalized";
+    }
+
     public int getAge() {
         return age;
     }

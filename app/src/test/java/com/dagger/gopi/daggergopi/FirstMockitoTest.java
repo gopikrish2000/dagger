@@ -76,6 +76,20 @@ public class FirstMockitoTest {
 
         Mockito.doCallRealMethod().when(student).howGoodStudentPercent();
         System.out.println("age = " + age + " marks " + marks + " howGoodStudentPercent " + studentWrapper.getStudent().howGoodStudentPercent());  // after calling doCallRealMethod  howGoodStudentPercent returns Correct value.
+
+        Mockito.when(student.getPersonalizedName("sampleName")).thenAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                String argument = (String) invocation.getArgument(0);
+                if(argument.contains("sample")){
+                    return "MockitoChangedSampleName";
+                }
+                return argument;
+            }
+        });
+
+        System.out.println(" personalizedName for sampleName is  " + student.getPersonalizedName("sampleName") + " personalizedName for dummyName is " + student.getPersonalizedName("dummyName"));
+
     }
 
 }
