@@ -25,6 +25,15 @@ public class Student {
         return ((int) ((getAge() * 0.5) + getMarks()));
     }
 
+    public void voidMethodDoingNothing() {
+
+    }
+
+    public int samplePrint() {
+        System.out.println("printing inside Student method samplePrint ");
+        return 1;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
