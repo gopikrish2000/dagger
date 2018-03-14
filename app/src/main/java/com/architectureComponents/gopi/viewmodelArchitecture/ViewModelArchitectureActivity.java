@@ -24,6 +24,12 @@ public class ViewModelArchitectureActivity extends AppCompatActivity {
                 System.out.println(" Data change in UI layer = " + s);
             }
         });
+        firstViewModel.convertedLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                System.out.println(" convertedLiveData change in UI layer = " + s);
+            }
+        });
 
         firstViewModel.changeLiveData();
     }

@@ -1,0 +1,51 @@
+
+1. Has LiveData, Flowable(rxjava) support
+2.
+To reference multiple entities at the same time using Room, you instead create a POJO that contains each entity, then write a query that joins the corresponding tables. This well-structured model, combined with Room's robust query validation capabilities, allows your app to consume fewer resources when loading.
+
+3. Type converters supported.
+public class Converters {
+    @TypeConverter
+    public static Date fromTimestamp(Long value) {
+        return value == null ? null : new Date(value);
+        }
+}
+
+@Database(entities = {User.class}, version = 1)
+@TypeConverters({Converters.class})
+public abstract class AppDatabase extends RoomDatabase {
+    public abstract UserDao userDao();
+}
+
+@Entity
+public class User {
+    private Date birthday; ...    // comes from long converted to Date.
+}
+
+4. Custom fields supported across tables as well. like below.
+@Dao
+public interface MyDao {
+   @Query("SELECT user.name AS userName, pet.name AS petName "
+          + "FROM user, pet "
+          + "WHERE user.id = pet.user_id")
+   public LiveData<List<UserPet>> loadUserAndPetNames();
+
+   // You can also define this class in a separate file, as long as you add the
+   // "public" access modifier.
+   static class UserPet {
+       public String userName;
+       public String petName;
+   }
+}
+
+5. Migration Support
+Room.databaseBuilder(getApplicationContext(), MyDb.class, "database-name")
+        .addMigrations(MIGRATION_1_2).build();
+
+static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+    @Override
+    public void migrate(SupportSQLiteDatabase database) {
+        database.execSQL("CREATE TABLE `Fruit` (`id` INTEGER, "
+                + "`name` TEXT, PRIMARY KEY(`id`))");
+    }
+};

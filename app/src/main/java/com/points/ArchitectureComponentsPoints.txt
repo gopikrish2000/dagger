@@ -1,0 +1,33 @@
+
+*************** Points::  ********************
+
+
+
+
+
+
+
+
+******************** doubts: ********************
+
+1. This is not calling observe ( how to set initial value to it )
+		nameLiveData = new MutableLiveData<>();
+        nameLiveData.setValue("first");
+
+2.  How to transform in a different thread?
+3. Should we need to initialize MutableLiveData inside its getters than in Constructor for lazy initialization?
+public class MyViewModel extends ViewModel {
+    private MutableLiveData<List<User>> users;
+    public LiveData<List<User>> getUsers() {
+        if (users == null) {
+            users = new MutableLiveData<List<Users>>();
+            loadUsers();
+        }
+        return users;
+    }
+
+    private void loadUsers() {
+        // Do an asyncronous operation to fetch users.
+    }
+}
+4. How to mix n match LiveData with RxJava asynchronous Data?
