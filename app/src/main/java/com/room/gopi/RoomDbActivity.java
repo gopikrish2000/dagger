@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.dagger.gopi.daggergopi.R;
 import com.others.GopiApplication;
+import com.room.gopi.daggerWrapper.DaggerRoomComponent;
+import com.room.gopi.daggerWrapper.RoomComponent;
 import com.utils.Utils;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -25,6 +28,8 @@ public class RoomDbActivity extends AppCompatActivity {
     private ItemStudentAdapter itemStudentAdapter;
     @Inject
     FirstRoomDatabase firstRoomDatabase;
+    /*@Inject @Named("roomDummy")
+    List<String> dummyDataList;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,9 @@ public class RoomDbActivity extends AppCompatActivity {
         setContentView(R.layout.activity_room_db);
         init();
         Utils.getApplicationInstance().getApplicationComponent().inject(this);
+        /*RoomComponent roomComponent = DaggerRoomComponent.builder().build();  // cannot use both injects DONNO Y
+        roomComponent.inject(this);*/
+        FirstRoomDatabase firstRoomDatabase = null;
         firstRoomDao = firstRoomDatabase.getFirstRoomDao();
         firstRoomDao.getAllStudents().observe(this, list -> {
             if(list != null && !list.isEmpty()) {
