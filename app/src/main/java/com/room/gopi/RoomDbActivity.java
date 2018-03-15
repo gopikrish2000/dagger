@@ -6,11 +6,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.dagger.gopi.daggergopi.R;
+import com.others.GopiApplication;
 import com.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,14 +23,16 @@ public class RoomDbActivity extends AppCompatActivity {
 
     private FirstRoomDao firstRoomDao;
     private ItemStudentAdapter itemStudentAdapter;
+    @Inject
+    FirstRoomDatabase firstRoomDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_db);
         init();
-
-        firstRoomDao = Utils.getApplicationInstance().getRoomdb().getFirstRoomDao();
+        Utils.getApplicationInstance().getApplicationComponent().inject(this);
+        firstRoomDao = firstRoomDatabase.getFirstRoomDao();
         firstRoomDao.getAllStudents().observe(this, list -> {
             if(list != null && !list.isEmpty()) {
                 itemStudentAdapter.updateData(list);
