@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.dagger.gopi.daggergopi">
 
-    <application
+    <application android:name="com.others.GopiApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,6 +23,8 @@
         <activity android:name="com.architectureComponents.gopi.FirstArchitectureComponentActivity">
         </activity>
         <activity android:name="com.architectureComponents.gopi.viewmodelArchitecture.ViewModelArchitectureActivity">
+        </activity>
+        <activity android:name="com.room.gopi.RoomDbActivity">
         </activity>
     </application>
 

@@ -8,6 +8,7 @@ import com.architectureComponents.gopi.FirstArchitectureComponentActivity;
 import com.architectureComponents.gopi.viewmodelArchitecture.ViewModelArchitectureActivity;
 import com.dagger.gopi.daggergopi.MainActivity;
 import com.dagger.gopi.daggergopi.R;
+import com.room.gopi.RoomDbActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -24,6 +25,10 @@ public class HomeActivity extends AppCompatActivity {
         });
         findViewById(R.id.first_architecture_btn).setOnClickListener((view) -> {
             Intent intent = new Intent(HomeActivity.this, ViewModelArchitectureActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.room_db_btn).setOnClickListener((view) -> {
+            Intent intent = new Intent(HomeActivity.this, RoomDbActivity.class);
             startActivity(intent);
         });
     }
