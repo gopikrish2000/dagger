@@ -39,7 +39,6 @@ public class RoomDbActivity extends AppCompatActivity {
         Utils.getApplicationInstance().getApplicationComponent().inject(this);
         /*RoomComponent roomComponent = DaggerRoomComponent.builder().build();  // cannot use both injects DONNO Y
         roomComponent.inject(this);*/
-        FirstRoomDatabase firstRoomDatabase = null;
         firstRoomDao = firstRoomDatabase.getFirstRoomDao();
         firstRoomDao.getAllStudents().observe(this, list -> {
             if(list != null && !list.isEmpty()) {
